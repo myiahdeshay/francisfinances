@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css"> <!-- Reference to index.css -->
     <title>Activity</title>
     <script src="activity.js"></script>
 </head>
@@ -24,6 +24,7 @@
     <section>
         <h3>Add Deposit</h3>
         <input type="number" id="depositAmount" placeholder="Deposit Amount" />
+        <label for="savingsPercentage">Savings Percentage:</label>
         <select id="savingsPercentage">
             <option value="0">0%</option>
             <option value="5">5%</option>
@@ -50,8 +51,7 @@
     </section>
 
     <button onclick="resetAllInformation()">Reset All Information</button>
-
+    
     <button onclick="window.location.href='monthly-deposits.html'">View Monthly Deposits</button>
-    <button onclick="window.location.href='activity.html'">Back to Activity</button>
 </body>
 </html>
