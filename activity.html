@@ -5,178 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
     <title>Activity</title>
-    <script>
-        let checkingBalance = 986;
-        let savingsBalance = 11322;
-        let expenses = [];
-        let nextClearTime = null;
-
-        // Load data from local storage
-        function loadData() {
-            const storedCheckingBalance = localStorage.getItem('checkingBalance');
-            const storedSavingsBalance = localStorage.getItem('savingsBalance');
-            const storedExpenses = localStorage.getItem('expenses');
-            const storedNextClearTime = localStorage.getItem('nextClearTime');
-
-            if (storedCheckingBalance) {
-                checkingBalance = parseFloat(storedCheckingBalance);
-            }
-            if (storedSavingsBalance) {
-                savingsBalance = parseFloat(storedSavingsBalance);
-            }
-            if (storedExpenses) {
-                expenses = JSON.parse(storedExpenses);
-            }
-            if (storedNextClearTime) {
-                nextClearTime = new Date(storedNextClearTime);
-            }
-        }
-
-        function updateLocalStorage() {
-            localStorage.setItem('checkingBalance', checkingBalance);
-            localStorage.setItem('savingsBalance', savingsBalance);
-            localStorage.setItem('expenses', JSON.stringify(expenses));
-            localStorage.setItem('nextClearTime', nextClearTime);
-        }
-
-        function updateBalances() {
-            document.getElementById('checkingBalance').innerText = `$${checkingBalance.toFixed(2)}`;
-            document.getElementById('savingsBalance').innerText = `$${savingsBalance.toFixed(2)}`;
-            updateLocalStorage();
-        }
-
-        function deposit() {
-            const depositAmount = parseFloat(document.getElementById('depositInput').value);
-            const savingsPercentage = parseFloat(document.querySelector('input[name="savingsPercentage"]:checked').value);
-            if (!isNaN(depositAmount) && depositAmount > 0) {
-                checkingBalance += depositAmount;
-                const savingsAmount = depositAmount * (savingsPercentage / 100);
-                savingsBalance += savingsAmount;
-                document.getElementById('depositInput').value = '';
-                updateBalances();
-            }
-        }
-
-        function addExpense() {
-            const expenseName = document.getElementById('expenseName').value;
-            const expenseAmount = parseFloat(document.getElementById('expenseAmount').value);
-            const expenseCategory = document.getElementById('expenseCategory').value;
-
-            if (expenseName && !isNaN(expenseAmount) && expenseAmount > 0) {
-                checkingBalance -= expenseAmount;
-                expenses.push({ name: expenseName, amount: expenseAmount, category: expenseCategory });
-                document.getElementById('expenseName').value = '';
-                document.getElementById('expenseAmount').value = '';
-                updateBalances();
-                displayExpenses();
-            }
-        }
-
-        function displayExpenses() {
-            const tableBody = document.getElementById('expenseTableBody');
-            tableBody.innerHTML = '';
-            expenses.forEach(expense => {
-                const row = `<tr>
-                                <td>${expense.name}</td>
-                                <td>$${expense.amount.toFixed(2)}</td>
-                                <td>${expense.category}</td>
-                             </tr>`;
-                tableBody.innerHTML += row;
-            });
-        }
-
-        function resetData() {
-            checkingBalance = 986;
-            savingsBalance = 11322;
-            expenses = [];
-            nextClearTime = null; // Reset next clear time
-            updateBalances();
-            displayExpenses();
-        }
-
-        function scheduleMonthlyClear() {
-            const now = new Date();
-            // If there's no next clear time, set it to the last day of the current month at 11:59 PM
-            if (!nextClearTime) {
-                nextClearTime = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59); // Last day of the month
-                updateLocalStorage();
-            }
-
-            // Check if we have passed the next clear time
-            if (now >= nextClearTime) {
-                expenses = [];
-                checkingBalance = 986; // Optionally reset checking balance if needed
-                nextClearTime = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59); // Reset to next month
-                updateBalances();
-                displayExpenses();
-                updateLocalStorage(); // Save the new clear time
-            }
-
-            // Check every minute if the time has passed
-            setInterval(() => {
-                const now = new Date();
-                if (now >= nextClearTime) {
-                    expenses = [];
-                    checkingBalance = 986; // Optionally reset checking balance if needed
-                    nextClearTime = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
-                    updateBalances();
-                    displayExpenses();
-                    updateLocalStorage(); // Save the new clear time
-                }
-            }, 60000);
-        }
-
-        function getGreeting() {
-            const now = new Date();
-            const hours = now.getHours();
-            let greeting = 'Hello!';
-
-            if (hours < 12) {
-                greeting = 'Good Morning!';
-            } else if (hours < 18) {
-                greeting = 'Good Afternoon!';
-            } else {
-                greeting = 'Good Evening!';
-            }
-
-            document.getElementById('greeting').innerText = greeting;
-        }
-
-        window.onload = function () {
-            loadData();
-            updateBalances();
-            displayExpenses();
-            scheduleMonthlyClear(); // Start the monthly clear scheduler
-            getGreeting(); // Set the greeting based on the time of day
-        };
-    </script>
-    <style>
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border-bottom: 1px solid #ccc;
-        }
-
-        #greeting {
-            font-size: 24px;
-            font-weight: bold;
-            flex-grow: 1;
-            text-align: center;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            padding: 10px 15px;
-        }
-
-        nav a:hover {
-            background-color: #ddd;
-        }
-    </style>
+    <script src="activity.js"></script>
 </head>
 <body>
     <nav>
@@ -185,30 +14,29 @@
         <a href="paybills.html">Pay Bills</a>
     </nav>
 
-    <h1>Activity</h1>
+    <h1>Activity Page</h1>
 
     <section>
-        <h2>Balances</h2>
-        <p>Checking Balance: <span id="checkingBalance">$986.00</span></p>
-        <p>Savings Balance: <span id="savingsBalance">$11,322.00</span></p>
+        <h2>Checking Balance: $<span id="checkingBalance">986</span></h2>
+        <h2>Savings Balance: $<span id="savingsBalance">11322</span></h2>
     </section>
 
     <section>
-        <h2>Deposit</h2>
-        <input type="number" id="depositInput" placeholder="Enter deposit amount" min="0" step="0.01">
-        <div>
-            <label><input type="radio" name="savingsPercentage" value="5" checked> Add 5% to Savings</label>
-            <label><input type="radio" name="savingsPercentage" value="10"> Add 10% to Savings</label>
-            <label><input type="radio" name="savingsPercentage" value="20"> Add 20% to Savings</label>
-        </div>
-        <button onclick="deposit()">Deposit</button>
-        <button onclick="window.location.href='monthly_deposits.html'">View Monthly Deposits</button>
+        <h3>Add Deposit</h3>
+        <input type="number" id="depositAmount" placeholder="Deposit Amount" />
+        <select id="savingsPercentage">
+            <option value="0">0%</option>
+            <option value="5">5%</option>
+            <option value="10">10%</option>
+            <option value="20">20%</option>
+        </select>
+        <button onclick="addDeposit()">Add Deposit</button>
     </section>
 
     <section>
-        <h2>Expenses</h2>
-        <input type="text" id="expenseName" placeholder="Name of Expense">
-        <input type="number" id="expenseAmount" placeholder="Amount Spent" min="0" step="0.01">
+        <h3>Expenses</h3>
+        <input type="text" id="expenseName" placeholder="Expense Name" />
+        <input type="number" id="expenseAmount" placeholder="Amount Spent" />
         <select id="expenseCategory">
             <option value="eating out">Eating Out</option>
             <option value="groceries">Groceries</option>
@@ -219,23 +47,11 @@
             <option value="life expense">Life Expense</option>
         </select>
         <button onclick="addExpense()">Add Expense</button>
-        <button onclick="window.location.href='monthly-expenses.html'">View Monthly Expenses</button>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Amount Spent</th>
-                    <th>Category</th>
-                </tr>
-            </thead>
-            <tbody id="expenseTableBody"></tbody>
-        </table>
     </section>
 
-    <section>
-        <button onclick="resetData()">Reset All Information</button>
-    </section>
-    <script src="activity.js"></script>
+    <button onclick="resetAllInformation()">Reset All Information</button>
+
+    <button onclick="window.location.href='monthly-deposits.html'">View Monthly Deposits</button>
+    <button onclick="window.location.href='activity.html'">Back to Activity</button>
 </body>
 </html>
