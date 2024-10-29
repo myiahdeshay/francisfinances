@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Monthly Deposits</title>
+    <script>
+        let deposits = JSON.parse(localStorage.getItem('monthlyDeposits')) || [];
+
+        function displayDeposits(month = null) {
+            const tableBody = document.getElementById('depositsTableBody');
+            tableBody.innerHTML = '';
+
+            const filteredDeposits = month 
+                ? deposits.filter(deposit => new Date(deposit.date).getMonth() === month) 
+                : deposits;
+
+            filteredDeposits.forEach(deposit => {
+                const row = `<tr>
+                                <td>${deposit.date}</td>
+                                <td>$${deposit.amount.toFixed(2)}</td>
+                                <td>${deposit.savingsPercentage}%</td>
+                             </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function updateMonth() {
+            const monthSelect = document.getElementById('monthSelect');
+            const selectedMonth = parseInt(monthSelect.value);
+            displayDeposits(selectedMonth);
+        }
+
+        window.onload = function() {
+            displayDeposits(); // Display all deposits on page load
+        };
+    </script>
+</head>
+<body>
+    <nav>
+        <a href="savings.html">Savings</a>
+        <div id="greeting">Hello!</div>
+        <a href="paybills.html">Pay Bills</a>
+    </nav>
+
+    <h1>Monthly Deposits</h1>
+
+    <label for="monthSelect">Select Month:</label>
+    <select id="monthSelect" onchange="updateMonth()">
+        <option value="">All</option>
+        <option value="0">January</option>
+        <option value="1">February</option>
+        <option value="2">March</option>
+        <option value="3">April</option>
+        <option value="4">May</option>
+        <option value="5">June</option>
+        <option value="6">July</option>
+        <option value="7">August</option>
+        <option value="8">September</option>
+        <option value="9">October</option>
+        <option value="10">November</option>
+        <option value="11">December</option>
+    </select>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Deposit Amount</th>
+                <th>Savings Percentage</th>
+            </tr>
+        </thead>
+        <tbody id="depositsTableBody"></tbody>
+    </table>
+
+    <button onclick="window.location.href='activity.html'">Back to Activity</button>
+</body>
+</html>
