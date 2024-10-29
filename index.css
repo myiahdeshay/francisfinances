@@ -67,7 +67,7 @@ header h1 {
     justify-content: center; /* Center buttons vertically */
     position: absolute; /* Position relative to container */
     right: 0; /* Align to the right */
-    margin-right: 20px; /* Space from right edge */
+    margin-left: calc(37.5% + 20px); /* Space from right edge of the image, adjust as necessary */
     height: calc(100%); /* Fill the height below header */
 }
 
