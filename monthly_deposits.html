@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="finance.css">
     <title>Monthly Deposits</title>
     <script>
+        // Load monthly deposits from local storage or initialize an empty array
         let deposits = JSON.parse(localStorage.getItem('monthlyDeposits')) || [];
 
         function displayDeposits(month = null) {
@@ -32,6 +33,7 @@
             displayDeposits(selectedMonth);
         }
 
+        // Load deposits and display them when the page loads
         window.onload = function() {
             displayDeposits(); // Display all deposits on page load
         };
@@ -45,6 +47,9 @@
     </nav>
 
     <h1>Monthly Deposits</h1>
+
+    <!-- Back to Activity button moved above the month selector -->
+    <button onclick="window.location.href='activity.html'">Back to Activity</button>
 
     <label for="monthSelect">Select Month:</label>
     <select id="monthSelect" onchange="updateMonth()">
@@ -73,7 +78,5 @@
         </thead>
         <tbody id="depositsTableBody"></tbody>
     </table>
-
-    <button onclick="window.location.href='activity.html'">Back to Activity</button>
 </body>
 </html>
