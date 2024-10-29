@@ -37,13 +37,14 @@ header h1 {
     justify-content: flex-start; /* Align items at the start */
     align-items: stretch; /* Stretch items to fill height */
     height: 100vh; /* Full height */
+    padding-top: 80px; /* Space for header */
 }
 
 /* Welcome section styling */
 .welcome-section {
     position: relative;
     width: 37.5%; /* Set width to 3/8 of the page */
-    height: 100%; /* Fill the height */
+    height: calc(100% - 80px); /* Fill height below the header */
 }
 
 .welcome-image {
@@ -71,22 +72,22 @@ header h1 {
     align-items: center;
     justify-content: center; /* Center buttons vertically */
     position: absolute; /* Position relative to container */
-    right: 0; /* Align to the right */
-    padding: 20px; /* Add padding */
-    height: 100%; /* Fill the height */
-    margin-right: 20px; /* Space between image and buttons */
+    left: 0; /* Align to the left */
+    margin-left: 20px; /* Space from left edge */
+    height: calc(100% - 80px); /* Fill the height below header */
 }
 
 .button-section button {
-    width: 200px;
-    padding: 15px;
-    font-size: 1.2em;
+    width: 220px; /* Increase button width */
+    padding: 20px; /* Increase padding for larger buttons */
+    font-size: 1.5em; /* Larger font size */
     color: #ffffff;
     background-color: #7A9775; /* Match color in the image */
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 15px 0; /* Space between buttons */
 }
 
 .button-section button:hover {
