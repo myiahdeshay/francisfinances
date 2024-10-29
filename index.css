@@ -17,7 +17,7 @@ body {
 header {
     background-color: #7A9775; /* Match color in the image */
     padding: 20px;
-    text-align: left; /* Align text to the left */
+    text-align: center; /* Center text in header */
     position: absolute; /* Position header absolutely */
     top: 0; /* Touch top */
     left: 0; /* Touch left */
@@ -35,28 +35,55 @@ header h1 {
 .container {
     display: flex;
     justify-content: center; /* Center contents */
-    align-items: flex-start; /* Align items at the start (below header) */
-    height: calc(100vh - 80px); /* Adjust height for header */
-    padding-top: 80px; /* Create space for the header */
+    align-items: center; /* Center contents vertically */
+    height: 100vh; /* Full height */
 }
 
 /* Welcome section styling */
 .welcome-section {
     position: relative;
     width: 100%; /* Make width 100% */
-    height: calc(50vh - 40px); /* Limit height to a little less than half the page */
+    height: 100%; /* Full height */
     display: flex; /* Use flexbox */
     justify-content: center; /* Center image */
     align-items: center; /* Center image */
 }
 
 .welcome-image {
-    max-width: 100%; /* Scale down the image */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 100%; /* Ensure image fits within the height */
+    width: 100%; /* Make image fill width */
+    height: 100%; /* Make image fill height */
+    object-fit: cover; /* Maintain aspect ratio without distortion */
     border-radius: 8px;
 }
 
+/* Navigation buttons container */
+.button-section {
+    position: absolute; /* Position buttons relative to the parent */
+    left: 20px; /* Distance from left edge of the page */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for height */
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 20px; /* Space between buttons */
+}
+
+.button-section button {
+    width: 200px;
+    padding: 15px;
+    font-size: 1.2em;
+    color: #ffffff;
+    background-color: #7A9775; /* Match color in the image */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-section button:hover {
+    background-color: #5D7B59; /* Darker shade for hover */
+}
+
+/* Centering welcome text */
 .welcome-text {
     position: absolute;
     top: 50%;
@@ -67,18 +94,3 @@ header h1 {
     text-align: center;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
-
-/* Button section styling */
-.button-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.button-section button {
-    width: 200px;
-    padding: 15px;
-    font-size: 1.2em;
-    color: #ffffff;
-    backgrou
