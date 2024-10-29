@@ -73,7 +73,7 @@ header h1 {
 }
 
 .button-section button {
-    width: 220px; /* Increase button width */
+    width: 250px; /* Increase button width */
     padding: 20px; /* Increase padding for larger buttons */
     font-size: 1.5em; /* Larger font size */
     color: #ffffff;
@@ -82,7 +82,7 @@ header h1 {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 15px 0; /* Space between buttons */
+    margin: 20px 0; /* Space between buttons */
 }
 
 .button-section button:hover {
