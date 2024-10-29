@@ -1,34 +1,92 @@
-html, body {
-    height: 100%;
-    margin: 0; /* Removes default margin */
-    background-color: #eaedeb; /* Set background color */
+/* Basic reset and styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #eaedeb; /* Changed background color */
+    color: #ffffff;
+    height: 100vh; /* Ensure body takes full height of viewport */
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Header styling */
+header {
+    background-color: #7A9775; /* Match color in the image */
+    padding: 20px;
+    text-align: left; /* Align text to the left */
+    position: absolute; /* Position header absolutely */
+    top: 0; /* Touch top */
+    left: 0; /* Touch left */
+    right: 0; /* Touch right */
+}
+
+/* Adjusted greeting heading */
+header h1 {
+    color: #ffffff;
+    font-size: 2em;
+    margin: 0; /* Remove margin */
+}
+
+/* Layout styling */
 .container {
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack elements vertically */
-    justify-content: space-between; /* Distribute space evenly */
-    height: 100%; /* Full height */
-    padding: 20px; /* Optional padding */
-    box-sizing: border-box; /* Include padding in height calculation */
+    display: flex;
+    justify-content: center; /* Center contents */
+    align-items: center;
+    height: calc(100vh - 80px); /* Adjust height for header */
 }
 
+/* Welcome section styling */
 .welcome-section {
-    flex: 1; /* Grow to fill available space */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
+    position: relative;
+    width: 100%; /* Make width 100% */
+    height: 100%; /* Make height 100% */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center image */
+    align-items: center; /* Center image */
 }
 
 .welcome-image {
-    max-width: 100%; /* Ensures the image does not exceed the width of its container */
+    width: 100%;
     height: auto; /* Maintain aspect ratio */
-    flex: 1; /* Make image fill available space */
+    max-height: 100%; /* Ensure image fits without scrolling */
+    border-radius: 8px;
 }
 
+.welcome-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Button section styling */
 .button-section {
-    display: flex; /* Use flexbox for buttons */
-    justify-content: center; /* Center buttons */
-    gap: 10px; /* Space between buttons */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.button-section button {
+    width: 200px;
+    padding: 15px;
+    font-size: 1.2em;
+    color: #ffffff;
+    background-color: #7A9775; /* Match color in the image */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-section button:hover {
+    background-color: #5D7B59; /* Darker shade for hover */
 }
